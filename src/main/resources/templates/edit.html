@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit user</title>
+</head>
+
+<body>
+<form th:method="PUT" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
+    <table>
+
+        <tr>
+            <td></td>
+            <td><input type="text" hidden name="id" th:field="${user.id}"/></td>
+        </tr>
+
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="username" th:field="${user.username}"/></td>
+        </tr>
+
+        <tr>
+            <td>Hobby</td>
+            <td><input type="text" name="hobby" th:field="${user.hobby}"/></td>
+        </tr>
+
+        <tr>
+            <td>Password</td>
+            <td><input type="text" name="password" th:field="${user.password}"/></td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Role:
+                    <select multiple size="2" name="select_role" class="form-control" id="exampleFormControlSelect3">
+                        <option th:each="role : ${role}" th:value="${role.getAuthority()}"
+                                th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"></option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Ok"/>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+<br>
+
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
+
+</body>
+</html>
